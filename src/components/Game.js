@@ -3,12 +3,17 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Item from "./Item";
 import cookieSrc from "../cookie.svg";
+import { useState } from "react";
 
 const items = [
   { id: "cursor", name: "Cursor", cost: 10, value: 1 },
   { id: "grandma", name: "Grandma", cost: 100, value: 10 },
   { id: "farm", name: "Farm", cost: 1000, value: 80 },
 ];
+
+const handleClick = () => {
+  console.log("click");
+};
 
 const Game = () => {
   // TODO: Replace this with React state!
@@ -42,6 +47,8 @@ const Game = () => {
               name={item.name}
               cost={item.cost}
               value={item.value}
+              purchasedItems={purchasedItems}
+              handleClick={handleClick}
             />
           );
         })}
