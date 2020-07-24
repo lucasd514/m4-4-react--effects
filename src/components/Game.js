@@ -11,17 +11,24 @@ const items = [
   { id: "farm", name: "Farm", cost: 1000, value: 80 },
 ];
 
-const handleClick = () => {
-  console.log("click");
-};
-
 const Game = () => {
   // TODO: Replace this with React state!
-  const numCookies = 100;
-  const purchasedItems = {
+  const [numCookies, setNumCookies] = React.useState(100000);
+  const [purchasedItems, setPurchasedItems] = React.useState({
     cursor: 0,
     grandma: 0,
     farm: 0,
+  });
+
+  const handleClick = (name, cost, value) => {
+    const updatedItems = purchasedItems;
+    if (cost > numCookies) {
+      console.log("brokey");
+    } else {
+      updatedItems[name.toLowerCase()] += 1;
+      setPurchasedItems(updatedItems);
+      setNumCookies(numCookies - cost);
+    }
   };
 
   return (
@@ -32,7 +39,7 @@ const Game = () => {
           {/* TODO: Calcuate the cookies per second and show it here: */}
           <strong>0</strong> cookies per second
         </Indicator>
-        <Button>
+        <Button onClick={() => setNumCookies(numCookies + 1)}>
           <Cookie src={cookieSrc} />
         </Button>
       </GameArea>
@@ -40,15 +47,15 @@ const Game = () => {
       <ItemArea>
         <SectionTitle>Items:</SectionTitle>
         {items.map((item) => {
-          console.log(items);
           return (
             <Item
               key={item.id}
               name={item.name}
               cost={item.cost}
               value={item.value}
-              purchasedItems={purchasedItems}
+              purchasedItems={[purchasedItems, setPurchasedItems]}
               handleClick={handleClick}
+              numCookies={[numCookies, setNumCookies]}
             />
           );
         })}
