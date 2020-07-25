@@ -32,7 +32,7 @@ const Game = () => {
 
     const numOfGeneratedCookies = calculateCookiesPerTick(purchasedItems);
 
-    // Add this number of cookies to the total
+    setNumCookies(numCookies + numOfGeneratedCookies);
   }, 1000);
 
   const handleClick = (name, cost, value) => {
