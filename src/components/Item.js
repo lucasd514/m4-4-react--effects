@@ -4,11 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
 
 const Item = (props) => {
-  console.log(props.purchasedItems);
   const getQty = props.name.toLowerCase();
-  console.log(getQty);
   const getThisQty = props.purchasedItems[0][getQty];
-  console.log(getThisQty);
   return (
     <button
       onClick={() => props.handleClick(props.name, props.cost, props.value)}
