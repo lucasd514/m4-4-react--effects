@@ -46,6 +46,20 @@ const Game = () => {
     }
   };
 
+  function useKeyboardEvent(key, callback) {
+    useEffect(() => {
+      const handler = function (event) {
+        if (event.key === "space") {
+          setNumCookies(numCookies + 1);
+        }
+      };
+      window.addEventListener("keydown", handler);
+      return () => {
+        window.removeEventListener("keydown", handler);
+      };
+    }, []);
+  }
+
   React.useEffect(() => {
     document.title = `${numCookies} cookies - Cookie Clicker Workshop`;
 
