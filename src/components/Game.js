@@ -14,7 +14,7 @@ const items = [
 
 const Game = () => {
   // TODO: Replace this with React state!
-  const [numCookies, setNumCookies] = React.useState(10000);
+  const [numCookies, setNumCookies] = React.useState(100);
   const [purchasedItems, setPurchasedItems] = React.useState({
     cursor: 0,
     grandma: 0,
@@ -46,19 +46,31 @@ const Game = () => {
     }
   };
 
-  function useKeyboardEvent(key, callback) {
-    useEffect(() => {
-      const handler = function (event) {
-        if (event.key === "space") {
-          setNumCookies(numCookies + 1);
-        }
-      };
-      window.addEventListener("keydown", handler);
-      return () => {
-        window.removeEventListener("keydown", handler);
-      };
-    }, []);
-  }
+  const handleSpaceDown = (evt) => {
+    if (evt.code === "Space") {
+      setNumCookies(numCookies + 1);
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("keypress", handleSpaceDown);
+    return () => {
+      window.removeEventListener("keydown", handleSpaceDown);
+    };
+  });
+  // function useKeyboardEvent(key, callback) {
+  //   useEffect(() => {
+  //     const handler = function (event) {
+  //       if (event.key === "space") {
+  //         setNumCookies(numCookies + 1);
+  //       }
+  //     };
+  //     window.addEventListener("keydown", handler);
+  //     return () => {
+  //       window.removeEventListener("keydown", handler);
+  //     };
+  //   }, []);
+  // }
 
   React.useEffect(() => {
     document.title = `${numCookies} cookies - Cookie Clicker Workshop`;
